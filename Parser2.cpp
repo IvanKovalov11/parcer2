@@ -1,19 +1,21 @@
 #include "stdafx.h"
 #include <iostream>
+#include <sstream>
+#include <string>
 using namespace std;
 
 int main()
 {
+	string string;
 	float x, y;
-	char op, op1;
-	cin >> x;
-	cin.get(op1);
-	while (op1 != '\n')
+	char op;
+	getline(cin, string);
+	istringstream stream(string);
+	stream >> x;
+	bool run = false;
+	while (stream >> op)
 	{
-		cin.get(op);
-		cin.get(op1);
-		cin >> y;
-		cin.get(op1);
+		stream >> y;
 		if (op == '+')
 		{
 			x = x + y;
@@ -37,9 +39,15 @@ int main()
 				x = x / y;
 			}
 		}
-			
+		else
+		{
+			cout << "Can't do this operation" << endl;
+			run = true;
+		}
 	}
-	cout << x;
-	system("pause");
+	if (!run)
+	{
+		cout << x;
+	}
 	return 0;
 }
